@@ -35,18 +35,6 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            GestureDetector(
-              onTap: () async {
-                // var response = DioProvider().getUsers();
-                // print(response);
-              },
-              child: Container(
-                width: 100,
-                height: 50,
-                color: Colors.amber,
-                child: Text('Print Data'),
-              ),
-            ),
             Visibility(
               visible: isLoaded,
               replacement: const Center(
@@ -57,7 +45,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: ListView.builder(
                   itemCount: users?.length,
                   itemBuilder: (context, index) {
-                    return Text('${users![index].name}');
+                    return Container(
+                      height: 100,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Colors.blue,
+                      ),
+                      child: Text('${users![index].name}'),
+                    );
                   },
                 ),
               ),
