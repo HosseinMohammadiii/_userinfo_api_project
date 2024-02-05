@@ -10,6 +10,11 @@ class Users {
     required this.zipcode,
     required this.lat,
     required this.lng,
+    required this.phone,
+    required this.website,
+    required this.companyname,
+    required this.catchPhrase,
+    required this.bs,
   });
   int id;
   String name;
@@ -21,6 +26,11 @@ class Users {
   String zipcode;
   String lat;
   String lng;
+  String phone;
+  String website;
+  String companyname;
+  String catchPhrase;
+  String bs;
 
   factory Users.fromMapJson(Map<String, dynamic> jsonObject) => Users(
         id: jsonObject['id'],
@@ -33,5 +43,10 @@ class Users {
         zipcode: jsonObject['address']['zipcode'],
         lat: jsonObject['address']['geo']['lat'],
         lng: jsonObject['address']['geo']['lng'],
+        phone: jsonObject['phone'],
+        website: jsonObject['website'],
+        companyname: jsonObject['company']['name'],
+        catchPhrase: jsonObject['company']['catchPhrase'],
+        bs: jsonObject['company']['bs'],
       );
 }

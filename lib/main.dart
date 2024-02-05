@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_project/screen/home_screen.dart';
+import 'package:flutter_api_project/Bloc/home_bloc.dart';
+import 'package:flutter_api_project/Data/users_datasource.dart';
+import 'package:flutter_api_project/Pages/home_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await getItInit();
   runApp(const MyApp());
 }
 
@@ -10,9 +15,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: BlocProvider(
+        create: (context) => HomeBloc(),
+        child: const HomeScreen(),
+      ),
     );
   }
 }
