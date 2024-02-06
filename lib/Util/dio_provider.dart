@@ -1,9 +1,15 @@
 import 'package:dio/dio.dart';
 
-class DioProvider {
-  static Dio createDio() {
-    Dio dio =
-        Dio(BaseOptions(baseUrl: 'https://jsonplaceholder.typicode.com/'));
+class DioProviderUsers {
+  static Dio createDioInfo() {
+    Dio dio = Dio(BaseOptions(baseUrl: 'https://reqres.in/api'));
+    return dio;
+  }
+}
+
+class DioProviderAvatars {
+  static Dio createDioAvatar() {
+    Dio dio = Dio(BaseOptions(baseUrl: 'https://reqres.in/api/'));
     return dio;
   }
 }

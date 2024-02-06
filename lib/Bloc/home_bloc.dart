@@ -5,12 +5,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final userDataSource _user = locator.get();
+  final userAvatarDataSource _userAvatar = locator.get();
   HomeBloc() : super(InitationHomeState()) {
     on<HomeRequest>(
       (event, emit) async {
         emit(LoadingHomeState());
-        var response = await _user.getUsers();
-        emit(ResponseHomeState(response));
+        var user = await _user.getUsers();
+        var avatar = await _userAvatar.getAvatarUsers();
+        emit(ResponseHomeState(user, avatar));
       },
     );
   }
