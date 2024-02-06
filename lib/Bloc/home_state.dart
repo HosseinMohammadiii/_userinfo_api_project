@@ -11,8 +11,10 @@ class LoadingHomeState extends HomeState {}
 class ResponseHomeState extends HomeState {
   ResponseHomeState(
     this.users,
-    this.avatarUsers,
+    this.avatarUsersPageOne,
+    this.avatarUsersPageTwo,
   );
   Either<String, List<Users>> users;
-  Either<String, List<AvatarUsers>> avatarUsers;
+  Either<String, List<AvatarUsers>> avatarUsersPageOne;
+  Either<String, List<AvatarUsers>> avatarUsersPageTwo;
 }

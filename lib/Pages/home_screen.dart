@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_api_project/Bloc/home_bloc.dart';
+import 'package:flutter_api_project/Models/avatar_users.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
@@ -75,73 +76,82 @@ class _HomeScreenState extends State<HomeScreen> {
                 if (state is ResponseHomeState) ...{
                   state.users.fold(
                     (exeption) {
-                      return SliverToBoxAdapter(
-                        child: Center(
-                          child: Container(
-                              height: 200,
-                              width: 200,
-                              color: Colors.amber,
-                              child: Text(exeption)),
-                        ),
-                      );
+                      return exeptionMessage(exeption);
                     },
                     (usersList) {
-                      return SliverPadding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 10),
-                        sliver: SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                            childCount: usersList.length,
-                            (context, index) {
-                              return Row(
-                                children: [
-                                  Container(
-                                    height: 100,
-                                    width: 90,
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 8, vertical: 5),
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10, vertical: 5),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      color: Colors.blue,
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 100,
-                                    width: 273,
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 8, vertical: 5),
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10, vertical: 5),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      color: Colors.white,
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          color: Colors.black,
-                                          blurRadius: 40,
-                                          spreadRadius: -40,
-                                          offset: Offset(0, 20),
+                      return state.avatarUsersPageOne.fold(
+                        (exeption) {
+                          return exeptionMessage(exeption);
+                        },
+                        (avatarUser) {
+                          return state.avatarUsersPageTwo.fold((exeption) {
+                            return exeptionMessage(exeption);
+                          }, (avatarUserTwo) {
+                            List<AvatarUsers> avatar =
+                                avatarUser + avatarUserTwo;
+                            return SliverPadding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 10),
+                              sliver: SliverList(
+                                delegate: SliverChildBuilderDelegate(
+                                  childCount: avatar.length - 2,
+                                  (context, index) {
+                                    return Row(
+                                      children: [
+                                        Container(
+                                          height: 100,
+                                          width: 90,
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 8, vertical: 5),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            child: Image.network(
+                                              avatar[index].avatar,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          height: 100,
+                                          width: 273,
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 8, vertical: 5),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10, vertical: 5),
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            color: Colors.white,
+                                            boxShadow: const [
+                                              BoxShadow(
+                                                color: Colors.black,
+                                                blurRadius: 40,
+                                                spreadRadius: -40,
+                                                offset: Offset(0, 20),
+                                              ),
+                                            ],
+                                          ),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(avatar[index].firstname),
+                                              Text(usersList[index].email),
+                                              Text(usersList[index].city),
+                                              Text(
+                                                  usersList[index].companyname),
+                                            ],
+                                          ),
                                         ),
                                       ],
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(usersList[index].name),
-                                        Text(usersList[index].email),
-                                        Text(usersList[index].city),
-                                        Text(usersList[index].companyname),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
-                        ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            );
+                          });
+                        },
                       );
                     },
                   ),
@@ -150,6 +160,14 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           );
         },
+      ),
+    );
+  }
+
+  SliverToBoxAdapter exeptionMessage(String exeption) {
+    return SliverToBoxAdapter(
+      child: Center(
+        child: Text('The Exeption Message:$exeption'),
       ),
     );
   }

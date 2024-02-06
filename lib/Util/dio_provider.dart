@@ -2,7 +2,8 @@ import 'package:dio/dio.dart';
 
 class DioProviderUsers {
   static Dio createDioInfo() {
-    Dio dio = Dio(BaseOptions(baseUrl: 'https://reqres.in/api'));
+    Dio dio =
+        Dio(BaseOptions(baseUrl: 'https://jsonplaceholder.typicode.com/'));
     return dio;
   }
 }
