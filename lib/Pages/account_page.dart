@@ -9,39 +9,51 @@ class AccountPage extends StatefulWidget {
 
 class _AccountPageState extends State<AccountPage>
     with TickerProviderStateMixin {
-  late final AnimationController _controller = AnimationController(
-    vsync: this,
-    duration: const Duration(seconds: 3),
-  );
-  late final Animation<double> _animation = CurvedAnimation(
+  late AnimationController _controller;
+  late Animation<double> expandedd;
+  late Animation<double> _animation = CurvedAnimation(
     parent: _controller,
-    curve: Curves.easeInCirc,
+    curve: Curves.linear,
   );
+
   @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+    );
+    _animation = Tween(begin: 2.0, end: 1.0).animate(_controller);
+    _controller.forward();
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: SizeTransition(
+        body: SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizeTransition(
                 sizeFactor: _animation,
+                axisAlignment: 1,
                 child: Container(
-                  height: 100,
-                  width: 100,
+                  height: MediaQuery.sizeOf(context).height,
                   color: Colors.amber,
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }
