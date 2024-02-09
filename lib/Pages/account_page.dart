@@ -17,7 +17,6 @@ class _AccountPageState extends State<AccountPage>
     parent: _controller,
     curve: Curves.easeInCirc,
   );
-  // easeInToLinear
   @override
   void dispose() {
     _controller.dispose();
