@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_api_project/Bloc/home_bloc.dart';
 import 'package:flutter_api_project/Data/users_datasource.dart';
+import 'package:flutter_api_project/Pages/account_page.dart';
 import 'package:flutter_api_project/Pages/home_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: BlocProvider(
         create: (context) => HomeBloc(),
-        child: const HomeScreen(),
+        child: const AccountPage(),
       ),
     );
   }

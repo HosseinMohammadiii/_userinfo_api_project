@@ -25,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xfff4e6f1),
       body: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
           return SafeArea(
@@ -89,6 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           }, (avatarUserTwo) {
                             List<AvatarUsers> avatar =
                                 avatarUser + avatarUserTwo;
+
                             return SliverPadding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 8, vertical: 10),
@@ -114,7 +116,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                         Container(
                                           height: 100,
-                                          width: 273,
+                                          width:
+                                              MediaQuery.sizeOf(context).width /
+                                                  1.51,
                                           margin: const EdgeInsets.symmetric(
                                               horizontal: 8, vertical: 5),
                                           padding: const EdgeInsets.symmetric(
@@ -122,25 +126,29 @@ class _HomeScreenState extends State<HomeScreen> {
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(8),
-                                            color: Colors.white,
-                                            boxShadow: const [
-                                              BoxShadow(
-                                                color: Colors.black,
-                                                blurRadius: 40,
-                                                spreadRadius: -40,
-                                                offset: Offset(0, 20),
-                                              ),
-                                            ],
+                                            gradient: const LinearGradient(
+                                              colors: [
+                                                Color(0xffebf4f5),
+                                                // Color(0xff096b79),
+                                                Color(0xffb5c6e0),
+                                              ],
+                                              transform: GradientRotation(90),
+                                              begin: Alignment.centerLeft,
+                                              end: Alignment.centerRight,
+                                            ),
                                           ),
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
                                             children: [
-                                              Text(avatar[index].firstname),
-                                              Text(usersList[index].email),
-                                              Text(usersList[index].city),
                                               Text(
-                                                  usersList[index].companyname),
+                                                  'Name: ${avatar[index].firstname + avatar[index].lastname}'),
+                                              Text(
+                                                  'City: ${usersList[index].city}'),
+                                              Text(
+                                                  'Email: ${avatar[index].email}'),
                                             ],
                                           ),
                                         ),
