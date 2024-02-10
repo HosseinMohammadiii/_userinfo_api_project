@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: BlocProvider(
         create: (context) => HomeBloc(),
-        child: const AccountPage(),
+        child: AccountPage(),
       ),
     );
   }

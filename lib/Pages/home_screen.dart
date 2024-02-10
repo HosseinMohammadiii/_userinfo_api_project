@@ -129,7 +129,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                             gradient: const LinearGradient(
                                               colors: [
                                                 Color(0xffebf4f5),
-                                                // Color(0xff096b79),
                                                 Color(0xffb5c6e0),
                                               ],
                                               transform: GradientRotation(90),
