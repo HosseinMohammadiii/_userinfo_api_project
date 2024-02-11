@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_api_project/Bloc/home_bloc.dart';
 import 'package:flutter_api_project/Models/avatar_users.dart';
+import 'package:flutter_api_project/Pages/account_page.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
@@ -8,14 +9,14 @@ import 'package:shimmer/shimmer.dart';
 import '../Bloc/home_event.dart';
 import '../Bloc/home_state.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     BlocProvider.of<HomeBloc>(context).add(HomeRequest());
@@ -114,41 +115,55 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ),
                                         ),
-                                        Container(
-                                          height: 100,
-                                          width:
-                                              MediaQuery.sizeOf(context).width /
-                                                  1.51,
-                                          margin: const EdgeInsets.symmetric(
-                                              horizontal: 8, vertical: 5),
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10, vertical: 5),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            gradient: const LinearGradient(
-                                              colors: [
-                                                Color(0xffebf4f5),
-                                                Color(0xffb5c6e0),
-                                              ],
-                                              transform: GradientRotation(90),
-                                              begin: Alignment.centerLeft,
-                                              end: Alignment.centerRight,
+                                        GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    AccountPage(
+                                                  avatarUsers: avatar[index],
+                                                  users: usersList[index],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          child: Container(
+                                            height: 100,
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width /
+                                                1.51,
+                                            margin: const EdgeInsets.symmetric(
+                                                horizontal: 8, vertical: 5),
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 10, vertical: 5),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              gradient: const LinearGradient(
+                                                colors: [
+                                                  Color(0xffebf4f5),
+                                                  Color(0xffb5c6e0),
+                                                ],
+                                                transform: GradientRotation(90),
+                                                begin: Alignment.centerLeft,
+                                                end: Alignment.centerRight,
+                                              ),
                                             ),
-                                          ),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              Text(
-                                                  'Name: ${avatar[index].firstname + avatar[index].lastname}'),
-                                              Text(
-                                                  'City: ${usersList[index].city}'),
-                                              Text(
-                                                  'Email: ${avatar[index].email}'),
-                                            ],
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Text(
+                                                    'Name: ${avatar[index].firstname + avatar[index].lastname}'),
+                                                Text(
+                                                    'City: ${usersList[index].city}'),
+                                                Text(
+                                                    'Email: ${avatar[index].email}'),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ],
