@@ -41,6 +41,7 @@ dependencies:
   get_it: ^7.6.7
   dartz: ^0.10.1
   delayed_display: ^2.0.0
+  typewritertext: ^2.3.1
 
 dev_dependencies:
   flutter_test:

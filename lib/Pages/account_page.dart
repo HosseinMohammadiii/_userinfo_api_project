@@ -2,18 +2,20 @@ import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_api_project/Models/avatar_users.dart';
 import 'package:flutter_api_project/Models/users.dart';
+import 'package:flutter_api_project/Widgets/about_user.dart';
 
 class AccountPage extends StatefulWidget {
   AccountPage({
     super.key,
     required this.avatarUsers,
     required this.users,
+    this.isTurn = false,
   });
 
   // Take The User Information From HomePage
   AvatarUsers avatarUsers;
   Users users;
-
+  bool isTurn;
   @override
   State<AccountPage> createState() => _AccountPageState();
 }
@@ -83,113 +85,183 @@ class _AccountPageState extends State<AccountPage>
                       end: Alignment.centerRight,
                     ),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      //Widget Text For Display Name And LastName User
-                      Text(
-                        widget.avatarUsers.firstname +
-                            widget.avatarUsers.lastname,
-                        style: const TextStyle(
-                          fontSize: 21,
-                          fontWeight: FontWeight.w700,
-                          color: Color(0xff062828),
-                        ),
-                      ),
-
-                      //Widget Row For Display Location Information User
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: 13,
-                            child: Image.network(
-                                'https://s8.uupload.ir/files/maps-and-flags_15n1.png'),
-                          ),
-                          const SizedBox(
-                            width: 2,
-                          ),
-                          Text(
-                            widget.users.city,
-                            style: const TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xff062828),
+                  child: widget.isTurn == false
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            //Widget Text For Display Name And LastName User
+                            Text(
+                              widget.avatarUsers.firstname +
+                                  widget.avatarUsers.lastname,
+                              style: const TextStyle(
+                                fontSize: 21,
+                                fontWeight: FontWeight.w700,
+                                color: Color(0xff062828),
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
 
-                      //Widgets DelayedDisplay For Display User Informatio(Email,Phone Number,Website)
-                      DelayedDisplay(
-                        delay: const Duration(seconds: 2),
-                        child: _boxShowInfoUser(
-                          image:
-                              'https://s8.uupload.ir/files/email_0ttg_r9cf.png',
-                          text: widget.avatarUsers.email,
-                        ),
-                      ),
-                      DelayedDisplay(
-                        delay: const Duration(seconds: 3),
-                        child: _boxShowInfoUser(
-                          image:
-                              'https://s8.uupload.ir/files/phone-call_1zmq_xzzl.png',
-                          text: widget.users.phone,
-                        ),
-                      ),
-                      DelayedDisplay(
-                        delay: const Duration(seconds: 4),
-                        child: _boxShowInfoUser(
-                          image:
-                              'https://s8.uupload.ir/files/global_osni_xhi7.png',
-                          text: widget.users.website,
-                        ),
-                      ),
-
-                      //Widget DelayedDisplay For Display Button More User Information
-                      DelayedDisplay(
-                        delay: const Duration(milliseconds: 4700),
-                        slidingBeginOffset: const Offset(0, -0.3),
-                        child: GestureDetector(
-                          onTap: () {},
-                          child: Container(
-                            width: 120,
-                            height: 40,
-                            margin: const EdgeInsets.only(top: 20, bottom: 60),
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 23, 133, 133),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Row(
+                            //Widget Row For Display Location Information User
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                const Text(
-                                  'More',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                  ),
+                                SizedBox(
+                                  height: 13,
+                                  child: Image.network(
+                                      'https://s8.uupload.ir/files/maps-and-flags_15n1.png'),
                                 ),
                                 const SizedBox(
-                                  width: 5,
+                                  width: 2,
                                 ),
-                                SizedBox(
-                                  height: 14,
-                                  child: Image.network(
-                                      'https://s8.uupload.ir/files/right-arrow_(1)_b463.png'),
+                                Text(
+                                  widget.users.city,
+                                  style: const TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0xff062828),
+                                  ),
                                 ),
                               ],
                             ),
-                          ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+
+                            //Widgets DelayedDisplay For Display User Informatio(Email,Phone Number,Website)
+                            DelayedDisplay(
+                              delay: const Duration(seconds: 2),
+                              child: _boxShowInfoUser(
+                                image:
+                                    'https://s8.uupload.ir/files/email_0ttg_r9cf.png',
+                                text: widget.avatarUsers.email,
+                              ),
+                            ),
+                            DelayedDisplay(
+                              delay: const Duration(seconds: 3),
+                              child: _boxShowInfoUser(
+                                image:
+                                    'https://s8.uupload.ir/files/phone-call_1zmq_xzzl.png',
+                                text: widget.users.phone,
+                              ),
+                            ),
+                            DelayedDisplay(
+                              delay: const Duration(seconds: 4),
+                              child: _boxShowInfoUser(
+                                image:
+                                    'https://s8.uupload.ir/files/global_osni_xhi7.png',
+                                text: widget.users.website,
+                              ),
+                            ),
+
+                            //Widget DelayedDisplay For Display Button More User Information
+                            DelayedDisplay(
+                              delay: const Duration(milliseconds: 4700),
+                              slidingBeginOffset: const Offset(0, -0.3),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 15),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        if (widget.isTurn == true) {
+                                          setState(() {
+                                            widget.isTurn = false;
+                                          });
+                                        } else {
+                                          Navigator.pop(context);
+                                        }
+                                      },
+                                      child: Container(
+                                        width: 120,
+                                        height: 40,
+                                        margin: const EdgeInsets.only(
+                                            top: 20, bottom: 60),
+                                        decoration: BoxDecoration(
+                                          color: const Color.fromARGB(
+                                              255, 23, 133, 133),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            SizedBox(
+                                              height: 14,
+                                              child: Image.network(
+                                                  'https://s8.uupload.ir/files/left-arrow_3vtq.png'),
+                                            ),
+                                            const SizedBox(
+                                              width: 8,
+                                            ),
+                                            const Text(
+                                              'Back',
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          widget.isTurn = true;
+                                        });
+                                      },
+                                      child: Container(
+                                        width: 120,
+                                        height: 40,
+                                        margin: const EdgeInsets.only(
+                                            top: 20, bottom: 60),
+                                        decoration: BoxDecoration(
+                                          color: const Color.fromARGB(
+                                              255, 23, 133, 133),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            const Text(
+                                              'More',
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              width: 8,
+                                            ),
+                                            SizedBox(
+                                              height: 14,
+                                              child: Image.network(
+                                                  'https://s8.uupload.ir/files/right-arrow_(1)_b463.png'),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      : AboutUserWidget(
+                          avatarUsers: widget.avatarUsers,
+                          users: widget.users,
                         ),
-                      ),
-                    ],
-                  ),
                 ),
               ),
 
@@ -228,7 +300,6 @@ class _AccountPageState extends State<AccountPage>
 //Widget Container For Create User Information Box(Email,Phone Number,Website)
   Container _boxShowInfoUser({required String image, required String text}) {
     return Container(
-      key: UniqueKey(),
       height: 50,
       margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 16),
       padding: const EdgeInsets.symmetric(horizontal: 15),

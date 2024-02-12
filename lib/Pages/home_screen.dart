@@ -99,36 +99,33 @@ class _HomePageState extends State<HomePage> {
                                 delegate: SliverChildBuilderDelegate(
                                   childCount: avatar.length - 2,
                                   (context, index) {
-                                    return Row(
-                                      children: [
-                                        Container(
-                                          height: 100,
-                                          width: 90,
-                                          margin: const EdgeInsets.symmetric(
-                                              horizontal: 8, vertical: 5),
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            child: Image.network(
-                                              avatar[index].avatar,
-                                              fit: BoxFit.cover,
-                                            ),
+                                    return GestureDetector(
+                                      onTap: () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => AccountPage(
+                                            avatarUsers: avatar[index],
+                                            users: usersList[index],
                                           ),
                                         ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    AccountPage(
-                                                  avatarUsers: avatar[index],
-                                                  users: usersList[index],
-                                                ),
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            height: 100,
+                                            width: 90,
+                                            margin: const EdgeInsets.symmetric(
+                                                horizontal: 8, vertical: 5),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              child: Image.network(
+                                                avatar[index].avatar,
+                                                fit: BoxFit.cover,
                                               ),
-                                            );
-                                          },
-                                          child: Container(
+                                            ),
+                                          ),
+                                          Container(
                                             height: 100,
                                             width: MediaQuery.sizeOf(context)
                                                     .width /
@@ -165,8 +162,8 @@ class _HomePageState extends State<HomePage> {
                                               ],
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     );
                                   },
                                 ),
