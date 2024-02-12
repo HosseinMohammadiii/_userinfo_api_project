@@ -21,13 +21,13 @@ class AccountPage extends StatefulWidget {
 
 class _AccountPageState extends State<AccountPage>
     with TickerProviderStateMixin {
-//This Animation For Display User Information Container Box
+//This Animation To Display User Information Container Box
   late final Animation<double> _sizeAnimation1 = CurvedAnimation(
     parent: _controller,
     curve: const Interval(0.1, 0.6, curve: Curves.linear),
   );
 
-//This Animation For Display Image User
+//This Animation To Display Image User
   late final Animation<double> _animationSize2 = CurvedAnimation(
     parent: _controller,
     curve: const Interval(0.5, 0.6, curve: Curves.linear),
