@@ -9,21 +9,18 @@ class AccountPage extends StatefulWidget {
     super.key,
     required this.avatarUsers,
     required this.users,
-    this.isTurn = false,
   });
 
-  // Take The User Information From HomePage
+  // Getting The User Information From HomePage
   AvatarUsers avatarUsers;
   Users users;
-  bool isTurn;
+
   @override
   State<AccountPage> createState() => _AccountPageState();
 }
 
 class _AccountPageState extends State<AccountPage>
     with TickerProviderStateMixin {
-  late AnimationController _controller;
-
 //This Animation For Display User Information Container Box
   late final Animation<double> _sizeAnimation1 = CurvedAnimation(
     parent: _controller,
@@ -36,15 +33,17 @@ class _AccountPageState extends State<AccountPage>
     curve: const Interval(0.5, 0.6, curve: Curves.linear),
   );
 
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 3),
-    )..forward();
-  }
+  //Controller For Control Animations
+  late final AnimationController _controller = AnimationController(
+    vsync: this,
+    duration: const Duration(seconds: 3),
+  )..forward();
 
+  //This Logical Is For Display AccountPage Or AboutUser Widget
+  bool isTurn = false;
+
+  //This Logical Is For Display Animations
+  bool isAnimate = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,7 +84,7 @@ class _AccountPageState extends State<AccountPage>
                       end: Alignment.centerRight,
                     ),
                   ),
-                  child: widget.isTurn == false
+                  child: isTurn == false
                       ? Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -129,7 +128,9 @@ class _AccountPageState extends State<AccountPage>
 
                             //Widgets DelayedDisplay For Display User Informatio(Email,Phone Number,Website)
                             DelayedDisplay(
-                              delay: const Duration(seconds: 2),
+                              delay: isAnimate
+                                  ? const Duration(seconds: 2)
+                                  : const Duration(seconds: 0),
                               child: _boxShowInfoUser(
                                 image:
                                     'https://s8.uupload.ir/files/email_0ttg_r9cf.png',
@@ -137,7 +138,9 @@ class _AccountPageState extends State<AccountPage>
                               ),
                             ),
                             DelayedDisplay(
-                              delay: const Duration(seconds: 3),
+                              delay: isAnimate
+                                  ? const Duration(seconds: 3)
+                                  : const Duration(seconds: 0),
                               child: _boxShowInfoUser(
                                 image:
                                     'https://s8.uupload.ir/files/phone-call_1zmq_xzzl.png',
@@ -145,7 +148,9 @@ class _AccountPageState extends State<AccountPage>
                               ),
                             ),
                             DelayedDisplay(
-                              delay: const Duration(seconds: 4),
+                              delay: isAnimate
+                                  ? const Duration(seconds: 4)
+                                  : const Duration(seconds: 0),
                               child: _boxShowInfoUser(
                                 image:
                                     'https://s8.uupload.ir/files/global_osni_xhi7.png',
@@ -155,7 +160,9 @@ class _AccountPageState extends State<AccountPage>
 
                             //Widget DelayedDisplay For Display Button More User Information
                             DelayedDisplay(
-                              delay: const Duration(milliseconds: 4700),
+                              delay: isAnimate
+                                  ? const Duration(milliseconds: 4700)
+                                  : const Duration(milliseconds: 0),
                               slidingBeginOffset: const Offset(0, -0.3),
                               child: Padding(
                                 padding:
@@ -166,9 +173,9 @@ class _AccountPageState extends State<AccountPage>
                                   children: [
                                     GestureDetector(
                                       onTap: () {
-                                        if (widget.isTurn == true) {
+                                        if (isTurn == true) {
                                           setState(() {
-                                            widget.isTurn = false;
+                                            isTurn = false;
                                           });
                                         } else {
                                           Navigator.pop(context);
@@ -213,7 +220,7 @@ class _AccountPageState extends State<AccountPage>
                                     GestureDetector(
                                       onTap: () {
                                         setState(() {
-                                          widget.isTurn = true;
+                                          isTurn = true;
                                         });
                                       },
                                       child: Container(
@@ -261,6 +268,12 @@ class _AccountPageState extends State<AccountPage>
                       : AboutUserWidget(
                           avatarUsers: widget.avatarUsers,
                           users: widget.users,
+                          onChange: () {
+                            setState(() {
+                              isTurn = false;
+                              isAnimate = false;
+                            });
+                          },
                         ),
                 ),
               ),

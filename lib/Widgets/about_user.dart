@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_api_project/Models/avatar_users.dart';
 import 'package:flutter_api_project/Models/users.dart';
-import 'package:flutter_api_project/Pages/account_page.dart';
 import 'package:typewritertext/typewritertext.dart';
 
 class AboutUserWidget extends StatelessWidget {
@@ -9,11 +8,19 @@ class AboutUserWidget extends StatelessWidget {
     super.key,
     required this.avatarUsers,
     required this.users,
+    required this.onChange,
   });
+
+  // Getting The User Information From HomePage
   AvatarUsers avatarUsers;
   Users users;
+
+//Changes the function to use another page
+  Function() onChange;
+
   @override
   Widget build(BuildContext context) {
+//Text Method To Display User Descriptive Information
     Text aboutUser(
       AvatarUsers avatarUsers,
       Users users,
@@ -35,13 +42,14 @@ class AboutUserWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          //Text Animation
           TypeWriterText(
             text: aboutUser(avatarUsers, users),
             duration: const Duration(milliseconds: 50),
-            //  alignment: Alignment.centerLeft,
           ),
           GestureDetector(
-            onTap: () {},
+            //Use Function onChange
+            onTap: () => onChange(),
             child: Container(
               width: 120,
               height: 40,
