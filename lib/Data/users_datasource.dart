@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_api_project/Models/avatar_users.dart';
@@ -32,15 +34,15 @@ class DioProviderUsersInfo extends userDataSource {
   @override
   Future<Either<String, List<Users>>> getUsers() async {
     final Dio dio = locator.get(instanceName: "first");
+
     try {
       var resposne = await dio.get('users');
 
       List<dynamic> json = resposne.data;
       List<Users> usersList = json.map((e) => Users.fromMapJson(e)).toList();
       return Right(usersList);
-    } on DioExceptionType {
-      throw ApiExeption(DioExceptionType.connectionError.index,
-          DioExceptionType.connectionError.name);
+    } on DioException catch (e) {
+      throw ApiExeption(e.hashCode, e.message);
     } catch (ex) {
       throw left(ApiExeption(0, 'unknown error'));
     }

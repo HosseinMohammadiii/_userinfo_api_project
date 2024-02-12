@@ -8,6 +8,11 @@ class InitationHomeState extends HomeState {}
 
 class LoadingHomeState extends HomeState {}
 
+class ErrorHomeState extends HomeState {
+  String errorMessage;
+  ErrorHomeState(this.errorMessage);
+}
+
 class ResponseHomeState extends HomeState {
   ResponseHomeState(
     this.users,

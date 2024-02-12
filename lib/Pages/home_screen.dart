@@ -20,6 +20,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     BlocProvider.of<HomeBloc>(context).add(HomeRequest());
+
     super.initState();
   }
 
@@ -32,6 +33,44 @@ class _HomePageState extends State<HomePage> {
           return SafeArea(
             child: CustomScrollView(
               slivers: [
+                if (state is ErrorHomeState) ...{
+                  SliverFillRemaining(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const CircularProgressIndicator(),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          state.errorMessage,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              BlocProvider.of<HomeBloc>(context)
+                                  .add(HomeRequest());
+                              if (BlocProvider.of<HomeBloc>(context).isClosed ==
+                                  false) {
+                                print(BlocProvider.of<HomeBloc>(context)
+                                    .isClosed);
+                              }
+                            });
+                          },
+                          child: const Text(
+                            'Retry',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                },
                 if (state is LoadingHomeState) ...{
                   SliverPadding(
                     padding:

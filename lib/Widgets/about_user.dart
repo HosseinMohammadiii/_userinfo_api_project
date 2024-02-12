@@ -15,7 +15,7 @@ class AboutUserWidget extends StatelessWidget {
   AvatarUsers avatarUsers;
   Users users;
 
-//Changes the function to use another page
+//Changes The Function to Use Another Page
   Function() onChange;
 
   @override

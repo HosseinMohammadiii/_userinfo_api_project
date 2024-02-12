@@ -130,7 +130,10 @@ class _AccountPageState extends State<AccountPage>
                             DelayedDisplay(
                               delay: isAnimate
                                   ? const Duration(seconds: 2)
-                                  : const Duration(seconds: 0),
+                                  : Duration.zero,
+                              fadingDuration: isAnimate
+                                  ? const Duration(milliseconds: 800)
+                                  : Duration.zero,
                               child: _boxShowInfoUser(
                                 image:
                                     'https://s8.uupload.ir/files/email_0ttg_r9cf.png',
@@ -140,7 +143,10 @@ class _AccountPageState extends State<AccountPage>
                             DelayedDisplay(
                               delay: isAnimate
                                   ? const Duration(seconds: 3)
-                                  : const Duration(seconds: 0),
+                                  : Duration.zero,
+                              fadingDuration: isAnimate
+                                  ? const Duration(milliseconds: 800)
+                                  : Duration.zero,
                               child: _boxShowInfoUser(
                                 image:
                                     'https://s8.uupload.ir/files/phone-call_1zmq_xzzl.png',
@@ -150,7 +156,10 @@ class _AccountPageState extends State<AccountPage>
                             DelayedDisplay(
                               delay: isAnimate
                                   ? const Duration(seconds: 4)
-                                  : const Duration(seconds: 0),
+                                  : Duration.zero,
+                              fadingDuration: isAnimate
+                                  ? const Duration(milliseconds: 800)
+                                  : Duration.zero,
                               child: _boxShowInfoUser(
                                 image:
                                     'https://s8.uupload.ir/files/global_osni_xhi7.png',
@@ -162,7 +171,10 @@ class _AccountPageState extends State<AccountPage>
                             DelayedDisplay(
                               delay: isAnimate
                                   ? const Duration(milliseconds: 4700)
-                                  : const Duration(milliseconds: 0),
+                                  : Duration.zero,
+                              fadingDuration: isAnimate
+                                  ? const Duration(milliseconds: 800)
+                                  : Duration.zero,
                               slidingBeginOffset: const Offset(0, -0.3),
                               child: Padding(
                                 padding:

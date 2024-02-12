@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_api_project/Bloc/home_event.dart';
 import 'package:flutter_api_project/Bloc/home_state.dart';
 import 'package:flutter_api_project/Data/users_datasource.dart';
@@ -9,17 +10,25 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(InitationHomeState()) {
     on<HomeRequest>(
       (event, emit) async {
-        emit(LoadingHomeState());
-        var user = await _user.getUsers();
-        var avatarPageOne = await _userAvatar.getAvatarUsersPageOne();
-        var avatarPageTwo = await _userAvatar.getAvatarUsersPageTwo();
-        emit(
-          ResponseHomeState(
-            user,
-            avatarPageOne,
-            avatarPageTwo,
-          ),
-        );
+        var connectivityResult = await Connectivity().checkConnectivity();
+        if (connectivityResult == ConnectivityResult.none) {
+          emit(ErrorHomeState(
+            'Check Your Internet Connection!',
+          ));
+          return;
+        } else {
+          emit(LoadingHomeState());
+          var user = await _user.getUsers();
+          var avatarPageOne = await _userAvatar.getAvatarUsersPageOne();
+          var avatarPageTwo = await _userAvatar.getAvatarUsersPageTwo();
+          emit(
+            ResponseHomeState(
+              user,
+              avatarPageOne,
+              avatarPageTwo,
+            ),
+          );
+        }
       },
     );
   }
