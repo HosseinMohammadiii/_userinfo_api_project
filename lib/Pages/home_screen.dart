@@ -202,7 +202,7 @@ class _HomePageState extends State<HomePage> {
                                                   //Display User First Name And Last Name
                                                   Text(
                                                       'Name: ${avatar[index].firstname + avatar[index].lastname}'),
-                                                  //Display User Name City
+                                                  //Display User City Name
                                                   Text(
                                                       'City: ${usersList[index].city}'),
                                                   //Display User Email Address
