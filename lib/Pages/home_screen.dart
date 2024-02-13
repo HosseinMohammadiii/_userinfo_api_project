@@ -190,16 +190,7 @@ class _HomePageState extends State<HomePage> {
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(8),
-                                                gradient: const LinearGradient(
-                                                  colors: [
-                                                    Color(0xffebf4f5),
-                                                    Color(0xffb5c6e0),
-                                                  ],
-                                                  transform:
-                                                      GradientRotation(90),
-                                                  begin: Alignment.centerLeft,
-                                                  end: Alignment.centerRight,
-                                                ),
+                                                color: const Color(0xffb5c6e0),
                                               ),
                                               child: Column(
                                                 crossAxisAlignment:
