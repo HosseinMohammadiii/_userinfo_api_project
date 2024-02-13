@@ -26,7 +26,7 @@ class AboutUserWidget extends StatelessWidget {
       Users users,
     ) {
       Text about = Text(
-        'Hi My name is ${avatarUsers.firstname + avatarUsers.lastname}.I living ${users.city} city.I am the owner of a company called ${users.companyname}.',
+        'Hi my name is ${avatarUsers.firstname + avatarUsers.lastname}.I living ${users.city} city.I am the owner of a company called ${users.companyname}.',
         textAlign: TextAlign.justify,
         style: const TextStyle(
           fontSize: 14,

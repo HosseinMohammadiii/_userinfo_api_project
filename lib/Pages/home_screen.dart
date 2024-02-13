@@ -19,6 +19,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
+    // Running The HomeRequest Event To Receive Data From The Server
     BlocProvider.of<HomeBloc>(context).add(HomeRequest());
 
     super.initState();
@@ -33,6 +34,7 @@ class _HomePageState extends State<HomePage> {
           return SafeArea(
             child: CustomScrollView(
               slivers: [
+                //State ErrorHomeState When No User Connection Internet
                 if (state is ErrorHomeState) ...{
                   SliverFillRemaining(
                     child: Column(
@@ -66,6 +68,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 },
+
+                //State LoadingHomeState To Waiting Receive Informatio From The Server
                 if (state is LoadingHomeState) ...{
                   SliverPadding(
                     padding:
@@ -109,101 +113,122 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 },
+
+                //State ResponseHomeState To Receive Response From The Server
                 if (state is ResponseHomeState) ...{
+                  //Using User State Fold Widget Function To Troubleshooting And Receiving Information
                   state.users.fold(
                     (exeption) {
                       return exeptionMessage(exeption);
                     },
                     (usersList) {
+                      //Using avatarUsersPageOne State Fold Widget Function To Troubleshooting And Receiving Information
                       return state.avatarUsersPageOne.fold(
                         (exeption) {
                           return exeptionMessage(exeption);
                         },
                         (avatarUser) {
-                          return state.avatarUsersPageTwo.fold((exeption) {
-                            return exeptionMessage(exeption);
-                          }, (avatarUserTwo) {
-                            List<AvatarUsers> avatar =
-                                avatarUser + avatarUserTwo;
+                          //Using avatarUsersPageTwo State Fold Widget Function To Troubleshooting And Receiving Information
+                          return state.avatarUsersPageTwo.fold(
+                            (exeption) {
+                              return exeptionMessage(exeption);
+                            },
+                            (avatarUserTwo) {
+                              //Merging Two Lists At One List
+                              List<AvatarUsers> avatar =
+                                  avatarUser + avatarUserTwo;
 
-                            return SliverPadding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 10),
-                              sliver: SliverList(
-                                delegate: SliverChildBuilderDelegate(
-                                  childCount: avatar.length - 2,
-                                  (context, index) {
-                                    return GestureDetector(
-                                      onTap: () => Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => AccountPage(
-                                            avatarUsers: avatar[index],
-                                            users: usersList[index],
+                              return SliverPadding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 10),
+                                sliver: SliverList(
+                                  delegate: SliverChildBuilderDelegate(
+                                    childCount: avatar.length - 2,
+                                    (context, index) {
+                                      //Button To Go To The AccountPage And Send Information User
+                                      return GestureDetector(
+                                        onTap: () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => AccountPage(
+                                              avatarUsers: avatar[index],
+                                              users: usersList[index],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Container(
-                                            height: 100,
-                                            width: 90,
-                                            margin: const EdgeInsets.symmetric(
-                                                horizontal: 8, vertical: 5),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              child: Image.network(
-                                                avatar[index].avatar,
-                                                fit: BoxFit.cover,
+                                        child: Row(
+                                          children: [
+                                            Container(
+                                              height: 100,
+                                              width: 90,
+                                              margin:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 8,
+                                                      vertical: 5),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                child: Image.network(
+                                                  avatar[index].avatar,
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          Container(
-                                            height: 100,
-                                            width: MediaQuery.sizeOf(context)
-                                                    .width /
-                                                1.51,
-                                            margin: const EdgeInsets.symmetric(
-                                                horizontal: 8, vertical: 5),
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 10, vertical: 5),
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              gradient: const LinearGradient(
-                                                colors: [
-                                                  Color(0xffebf4f5),
-                                                  Color(0xffb5c6e0),
+                                            Container(
+                                              height: 100,
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width /
+                                                  1.51,
+                                              margin:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 8,
+                                                      vertical: 5),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 10,
+                                                      vertical: 5),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                gradient: const LinearGradient(
+                                                  colors: [
+                                                    Color(0xffebf4f5),
+                                                    Color(0xffb5c6e0),
+                                                  ],
+                                                  transform:
+                                                      GradientRotation(90),
+                                                  begin: Alignment.centerLeft,
+                                                  end: Alignment.centerRight,
+                                                ),
+                                              ),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  //Display User First Name And Last Name
+                                                  Text(
+                                                      'Name: ${avatar[index].firstname + avatar[index].lastname}'),
+                                                  //Display User Name City
+                                                  Text(
+                                                      'City: ${usersList[index].city}'),
+                                                  //Display User Email Address
+                                                  Text(
+                                                      'Email: ${avatar[index].email}'),
                                                 ],
-                                                transform: GradientRotation(90),
-                                                begin: Alignment.centerLeft,
-                                                end: Alignment.centerRight,
                                               ),
                                             ),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Text(
-                                                    'Name: ${avatar[index].firstname + avatar[index].lastname}'),
-                                                Text(
-                                                    'City: ${usersList[index].city}'),
-                                                Text(
-                                                    'Email: ${avatar[index].email}'),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  ),
                                 ),
-                              ),
-                            );
-                          });
+                              );
+                            },
+                          );
                         },
                       );
                     },
