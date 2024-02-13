@@ -106,8 +106,8 @@ class _AccountPageState extends State<AccountPage>
                               children: [
                                 SizedBox(
                                   height: 13,
-                                  child: Image.network(
-                                      'https://s8.uupload.ir/files/maps-and-flags_15n1.png'),
+                                  child: Image.asset(
+                                      'images/maps-and-flags_15n1.png'),
                                 ),
                                 const SizedBox(
                                   width: 2,
@@ -135,8 +135,7 @@ class _AccountPageState extends State<AccountPage>
                                   ? const Duration(milliseconds: 800)
                                   : Duration.zero,
                               child: _boxShowInfoUser(
-                                image:
-                                    'https://s8.uupload.ir/files/email_0ttg_r9cf.png',
+                                image: 'email_0ttg_r9cf.png',
                                 text: widget.avatarUsers.email,
                               ),
                             ),
@@ -148,8 +147,7 @@ class _AccountPageState extends State<AccountPage>
                                   ? const Duration(milliseconds: 800)
                                   : Duration.zero,
                               child: _boxShowInfoUser(
-                                image:
-                                    'https://s8.uupload.ir/files/phone-call_1zmq_xzzl.png',
+                                image: 'phone-call_1zmq_xzzl.png',
                                 text: widget.users.phone,
                               ),
                             ),
@@ -161,8 +159,7 @@ class _AccountPageState extends State<AccountPage>
                                   ? const Duration(milliseconds: 800)
                                   : Duration.zero,
                               child: _boxShowInfoUser(
-                                image:
-                                    'https://s8.uupload.ir/files/global_osni_xhi7.png',
+                                image: 'global_osni_xhi7.png',
                                 text: widget.users.website,
                               ),
                             ),
@@ -212,8 +209,8 @@ class _AccountPageState extends State<AccountPage>
                                           children: [
                                             SizedBox(
                                               height: 14,
-                                              child: Image.network(
-                                                  'https://s8.uupload.ir/files/left-arrow_3vtq.png'),
+                                              child: Image.asset(
+                                                  'images/left-arrow_3vtq.png'),
                                             ),
                                             const SizedBox(
                                               width: 8,
@@ -264,8 +261,8 @@ class _AccountPageState extends State<AccountPage>
                                             ),
                                             SizedBox(
                                               height: 14,
-                                              child: Image.network(
-                                                  'https://s8.uupload.ir/files/right-arrow_(1)_b463.png'),
+                                              child: Image.asset(
+                                                  'images/right-arrow_(1)_b463.png'),
                                             ),
                                           ],
                                         ),
@@ -339,7 +336,7 @@ class _AccountPageState extends State<AccountPage>
         children: [
           SizedBox(
             height: 25,
-            child: Image.network(image),
+            child: Image.asset('images/$image'),
           ),
           const SizedBox(
             width: 12,

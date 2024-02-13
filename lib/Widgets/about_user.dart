@@ -64,8 +64,7 @@ class AboutUserWidget extends StatelessWidget {
                 children: [
                   SizedBox(
                     height: 14,
-                    child: Image.network(
-                        'https://s8.uupload.ir/files/left-arrow_3vtq.png'),
+                    child: Image.asset('images/left-arrow_3vtq.png'),
                   ),
                   const SizedBox(
                     width: 8,

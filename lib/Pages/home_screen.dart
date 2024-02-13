@@ -53,11 +53,6 @@ class _HomePageState extends State<HomePage> {
                             setState(() {
                               BlocProvider.of<HomeBloc>(context)
                                   .add(HomeRequest());
-                              if (BlocProvider.of<HomeBloc>(context).isClosed ==
-                                  false) {
-                                print(BlocProvider.of<HomeBloc>(context)
-                                    .isClosed);
-                              }
                             });
                           },
                           child: const Text(

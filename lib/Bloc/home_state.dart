@@ -10,6 +10,7 @@ class LoadingHomeState extends HomeState {}
 
 class ErrorHomeState extends HomeState {
   String errorMessage;
+
   ErrorHomeState(this.errorMessage);
 }
 
