@@ -10,6 +10,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(InitationHomeState()) {
     on<HomeRequest>(
       (event, emit) async {
+        emit(LoadingHomeState());
         var connectivityResult = await Connectivity().checkConnectivity();
         if (connectivityResult == ConnectivityResult.none) {
           emit(ErrorHomeState(
@@ -17,7 +18,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           ));
           return;
         } else {
-          emit(LoadingHomeState());
           var user = await _user.getUsers();
           var avatarPageOne = await _userAvatar.getAvatarUsersPageOne();
           var avatarPageTwo = await _userAvatar.getAvatarUsersPageTwo();

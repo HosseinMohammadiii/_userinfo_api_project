@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_api_project/Models/avatar_users.dart';
@@ -40,7 +38,7 @@ class DioProviderUsersInfo extends userDataSource {
 
       List<dynamic> json = resposne.data;
       List<Users> usersList = json.map((e) => Users.fromMapJson(e)).toList();
-      return Right(usersList);
+      return right(usersList);
     } on DioException catch (e) {
       throw ApiExeption(e.hashCode, e.message);
     } catch (ex) {
@@ -63,7 +61,7 @@ class DioProviderAvatarsInfo extends userAvatarDataSource {
       List<dynamic> json = resposne.data['data'];
       List<AvatarUsers> avatarList =
           json.map((e) => AvatarUsers.fromMapJson(e)).toList();
-      return Right(avatarList);
+      return right(avatarList);
     } on DioExceptionType {
       throw ApiExeption(DioExceptionType.connectionError.index,
           DioExceptionType.connectionError.name);
@@ -84,7 +82,7 @@ class DioProviderAvatarsInfo extends userAvatarDataSource {
       List<dynamic> json = resposne.data['data'];
       List<AvatarUsers> avatarList =
           json.map((e) => AvatarUsers.fromMapJson(e)).toList();
-      return Right(avatarList);
+      return right(avatarList);
     } on DioExceptionType {
       throw ApiExeption(DioExceptionType.connectionError.index,
           DioExceptionType.connectionError.name);
