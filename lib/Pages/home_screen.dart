@@ -139,8 +139,8 @@ class _HomePageState extends State<HomePage> {
                                   avatarUser + avatarUserTwo;
 
                               return SliverPadding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 8, vertical: 10),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10),
                                 sliver: SliverList(
                                   delegate: SliverChildBuilderDelegate(
                                     childCount: avatar.length - 2,
@@ -178,7 +178,7 @@ class _HomePageState extends State<HomePage> {
                                               height: 100,
                                               width: MediaQuery.sizeOf(context)
                                                       .width /
-                                                  1.51,
+                                                  1.44,
                                               margin:
                                                   const EdgeInsets.symmetric(
                                                       horizontal: 8,
