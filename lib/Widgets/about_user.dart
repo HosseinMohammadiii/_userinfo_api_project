@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_api_project/Models/avatar_users.dart';
 import 'package:flutter_api_project/Models/users.dart';
@@ -47,37 +48,44 @@ class AboutUserWidget extends StatelessWidget {
             text: aboutUser(avatarUsers, users),
             duration: const Duration(milliseconds: 50),
           ),
-          GestureDetector(
-            //Use Function onChange
-            onTap: () => onChange(),
-            child: Container(
-              width: 120,
-              height: 40,
-              margin: const EdgeInsets.only(top: 30, bottom: 60, right: 260),
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 23, 133, 133),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 14,
-                    child: Image.asset('images/left-arrow_3vtq.png'),
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  const Text(
-                    'Back',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white,
+          Padding(
+            padding: const EdgeInsets.only(bottom: 30),
+            child: Row(
+              children: [
+                GestureDetector(
+                  //Use Function onChange
+                  onTap: () => onChange(),
+                  child: Container(
+                    width: 120,
+                    height: 40,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 23, 133, 133),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 14,
+                          child: Image.asset('images/left-arrow_3vtq.png'),
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        const Text(
+                          'Back',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ],

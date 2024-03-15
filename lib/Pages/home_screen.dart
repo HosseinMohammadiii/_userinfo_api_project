@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_api_project/Bloc/home_bloc.dart';
 import 'package:flutter_api_project/Models/avatar_users.dart';
 import 'package:flutter_api_project/Pages/account_page.dart';
@@ -29,6 +31,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xfff4e6f1),
+      appBar: PreferredSize(
+        preferredSize: const Size(0, 0),
+        child: AppBar(
+          backgroundColor: const Color(0xfff4e6f1),
+        ),
+      ),
       body: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
           return SafeArea(
@@ -174,41 +182,47 @@ class _HomePageState extends State<HomePage> {
                                                 ),
                                               ),
                                             ),
-                                            Container(
-                                              height: 100,
-                                              width: MediaQuery.sizeOf(context)
-                                                      .width /
-                                                  1.44,
-                                              margin:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 8,
-                                                      vertical: 5),
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 10,
-                                                      vertical: 5),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                                color: const Color(0xffb5c6e0),
-                                              ),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
-                                                children: [
-                                                  //Display User First Name And Last Name
-                                                  Text(
-                                                      'Name: ${avatar[index].firstname + avatar[index].lastname}'),
-                                                  //Display User City Name
-                                                  Text(
-                                                      'City: ${usersList[index].city}'),
-                                                  //Display User Email Address
-                                                  Text(
-                                                      'Email: ${avatar[index].email}'),
-                                                ],
+                                            Expanded(
+                                              child: Container(
+                                                height: 100,
+                                                margin:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8,
+                                                        vertical: 5),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 10,
+                                                        vertical: 5),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  color:
+                                                      const Color(0xffb5c6e0),
+                                                ),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceEvenly,
+                                                  children: [
+                                                    //Display User First Name And Last Name
+                                                    Expanded(
+                                                      child: Text(
+                                                          'Name: ${avatar[index].firstname + avatar[index].lastname}'),
+                                                    ),
+                                                    //Display User City Name
+                                                    Expanded(
+                                                      child: Text(
+                                                          'City: ${usersList[index].city}'),
+                                                    ),
+                                                    //Display User Email Address
+                                                    Expanded(
+                                                      child: Text(
+                                                          'Email: ${avatar[index].email}'),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ],

@@ -48,6 +48,12 @@ class _AccountPageState extends State<AccountPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size(0, 0),
+        child: AppBar(
+          backgroundColor: const Color(0xffb9dcf2),
+        ),
+      ),
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
