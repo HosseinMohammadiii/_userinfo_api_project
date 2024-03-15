@@ -65,9 +65,8 @@ class _AccountPageState extends State<AccountPage>
                     padding: const EdgeInsets.only(top: 100),
                     height: MediaQuery.sizeOf(context).height,
                     alignment: Alignment.topCenter,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: const Color(0xffb9dcf2),
+                    decoration: const BoxDecoration(
+                      color: Color(0xffb9dcf2),
                     ),
                   ),
                   SizeTransition(

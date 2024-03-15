@@ -102,16 +102,18 @@ class _HomePageState extends State<HomePage> {
                                   color: Colors.blue,
                                 ),
                               ),
-                              Container(
-                                height: 100,
-                                width: 265,
-                                margin: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 5),
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 5),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: Colors.blue,
+                              Expanded(
+                                child: Container(
+                                  height: 100,
+                                  // width: 265,
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 5),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 5),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: Colors.blue,
+                                  ),
                                 ),
                               ),
                             ],
